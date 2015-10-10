@@ -54,12 +54,12 @@ def indi_sentiment(reviews):
 
 
 #TEST FILES
-splitReviews = reviewTokenize(reviews)
-splitSentence = splitSentence(splitReviews)
-print(splitSentence)
-dict = repetitionCheck(splitSentence)
-sentiment = indi_sentiment(splitReviews)
-print(sentiment)
+# splitReviews = reviewTokenize(reviews)
+# splitSentence = splitSentence(splitReviews)
+# print(splitSentence)
+# dict = repetitionCheck(splitSentence)
+# sentiment = indi_sentiment(splitReviews)
+# print(sentiment)
 #Types of different word lists needed
 #sentences are split up into words
 splitSentence = 0
