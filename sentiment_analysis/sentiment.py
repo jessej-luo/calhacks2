@@ -1,5 +1,6 @@
 import json, operator, indicoio
 from nltk import sent_tokenize
+import re
 
 with open('reviews_small.json') as reviews_file:
 	reviews = json.load(reviews_file)
@@ -10,6 +11,7 @@ indicoio.config.api_key = 'b7053e769d8d561cd1c1f5c1636010f0'
 #Splits each review into a list of sentences, split by period
 def reviewTokenize(reviews):
 	return [sent_tokenize(review['text']) for review in reviews]
+print(reviewTokenize(reviews))
 
 #Splits each sentence in review into a bunch of words
 def splitSentence(split_reviews):
@@ -67,4 +69,15 @@ splitSentence = 0
 splitReviews = 0
 #sentences are cleaned
 cleanedSentence = 0
+
+#Punctuation 
+punctuation = ['(', ')', '?', ':', ';', ',', '.', '!', '/', '"', "'"]
+#split_punctuation_words = re.findall(r"[\w']+|[.,!?;]", sentence)
+def punctuation_counter(l1,l2):
+	return sum(a==b for a,b in zip(l1,l2))
+#print(punctuation_counter(punctuation,reviewTokenize(reviews)))
+print(re.split('(\W+)', 'Words, words, words.'))
+
+
+
 
