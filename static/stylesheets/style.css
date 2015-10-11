@@ -1,0 +1,58 @@
+body {
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+}
+
+.container-back {
+	background-image: url("../images/restaurant1.jpg");
+	background-size: cover;
+	min-height: 100vh;
+	width: 100%;
+}
+
+.form-main {
+	max-width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 30px;
+	font-weight: 100;
+	position: relative;
+}
+
+.form-horizontal {
+	width: 100%;
+}
+
+.welcome {
+	margin-top: 0px;
+	font-weight: 300;
+	text-align: center;
+	font-size: 4em;
+}
+
+label {
+	font-weight: 100;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5em;
+}
+
+.submit-section {
+	right: 0;
+	position: absolute;
+}
+
+.chars-left {
+	margin-right: 5px;
+}
+
+.negative {
+	color: red;
+}
+
+.stars-section {
+	margin-top: 50px;
+}
+
+.true-rating {
+	margin-top: 10px;
+}

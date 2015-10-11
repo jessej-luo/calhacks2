@@ -17,7 +17,7 @@ def get_db():
 
 @app.route("/", methods=['POST'])
 def main():
-	return "Welcome!"
+	return render_template('index.ejs')
 
 if __name__ == "__main__":
 	app.run()
