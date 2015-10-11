@@ -52,6 +52,7 @@ def indi_sentiment(reviews):
 		id += 1
 	return sentiment_dict
 
+#webapp functions
 
 #TEST FILES
 # splitReviews = reviewTokenize(reviews)
