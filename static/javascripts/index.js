@@ -38,7 +38,15 @@ $(document).ready(function() {
 
 	calculateChars();
 
+	var setCog = function() {
+		$('.submit-section').html('<i class="fa fa-cog fa-spin"></i>');
+		$('.submit-section').addClass('cog');
+	}
+
 	$('.submit-review').bind('click', function() {
+		$.ajaxSetup({
+		   beforeSend: setCog
+		});
 		if ($('.review-text').val().length <= 5000) {
 			var review = $('.review-text').val();
 			$.post(
@@ -54,7 +62,9 @@ $(document).ready(function() {
 						$(this).removeClass('fa-star-o').addClass('fa-star');
 					}
 				});
-				$('submit-section').remove();
+				$('.submit-section').remove();
+				$('.review-text').attr('disabled', true);
+				$('.business').attr('disabled', true);
 			}).fail(function(response) {
 				$('.submit-review').unbind('click');
 				$('.submit-section').after('<div>Fail</div>');
