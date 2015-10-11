@@ -47,7 +47,7 @@ $(document).ready(function() {
 		$.ajaxSetup({
 		   beforeSend: setCog
 		});
-		if ($('.review-text').val().length <= 5000) {
+		if ($('.review-text').val().length <= 5000 && $('.review-text').val().length > 0) {
 			var review = $('.review-text').val();
 			$.post(
 				'/review',
@@ -68,6 +68,7 @@ $(document).ready(function() {
 			}).fail(function(response) {
 				$('.submit-review').unbind('click');
 				$('.submit-section').after('<div>Fail</div>');
+				$('.submit-section').remove();
 			});
 		}
 	});
@@ -80,8 +81,8 @@ $(document).ready(function() {
 				'/review_add',
 				{stars: stars, review: review}
 			).done(function(res) {
-				$('.submit-stars').unbind('click');
-				$('.stars-section').after("<div>Thank you!</div>");
+				$('.submit-stars').remove();
+				$('.stars-section').before('<div class="thanks">Thanks for your review! <a href="#" class="another-link">Submit Another</a></div>');
 			}).fail(function(response) {
 				$('.submit-review').unbind('click');
 				$('.stars-section').after('<div>Fail</div>');
@@ -112,5 +113,10 @@ $(document).ready(function() {
 		$(this).nextAll().removeClass('fa-star').addClass('fa-star-o');
 		$(this).removeClass('fa-star-o').addClass('fa-star');
 	    $(this).prevAll().removeClass('fa-star-o').addClass('fa-star');
+	});
+
+	$(document).on('click', '.another-link', function(e) {
+		e.preventDefault();
+		location.reload();
 	});
 });

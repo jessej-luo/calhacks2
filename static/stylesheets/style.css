@@ -21,8 +21,8 @@ body {
 	font-weight: 100;
 	position: relative;
 	background: rgba(255, 255, 255, 0.3);
-	border-radius: 5px;
 	text-align: center;
+	border-radius: 5px;
 }
 
 form {
@@ -49,6 +49,8 @@ label {
 
 .chars-left {
 	margin-right: 5px;
+	font-weight: 400;
+	font-size: 20px;
 }
 
 .negative {
@@ -74,4 +76,19 @@ label {
 .cog {
 	text-align: center;
 	position: relative;
+}
+
+.thanks {
+	font-size: 1.5em;
+}
+
+.another-link {
+	text-decoration: none;
+	font-weight: 600;
+	color: #fff;
+}
+
+.another-link:hover {
+	text-decoration: none;
+	color: #777;
 }
