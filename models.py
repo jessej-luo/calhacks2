@@ -14,12 +14,15 @@ class Review(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	review = db.Column(db.String(5000), primary_key=True)
 	stars = db.Column(db.Integer, primary_key=True)
+	sentiment = db.Column(db.Integer, primary_key=True)
 
-	def __init__(self, id, review, stars):
+	def __init__(self, id, review, stars, sentiment):
 		self.id = id
 		self.review = review
 		self.stars = stars
+		self.sentiment = sentiment
 
 	def __repr__(self):
-		return '<ID: {} Stars: {} Review: {}>'.format(self.id, self.stars, self.review[0:100])
+		return '<ID: {} Stars: {} Sentiment: {} Review: {}>'.format(
+			self.id, self.stars, self.sentiment, self.review[0:100])
 
