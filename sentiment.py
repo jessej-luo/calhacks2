@@ -68,7 +68,6 @@ def averageSentiment(reviews):
 		stars_dict[key] = stars_dict[key]/stars_count[key]
 	return stars_dict
 
-#average sentiment of complete database
 def averageDBsentiment():
 	stars_dict = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
 	stars_count = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
@@ -79,9 +78,8 @@ def averageDBsentiment():
 		stars_dict[key] = stars_dict[key]/stars_count[key]
 	return stars_dict
 
-sentiment_dict = averageDBsentiment()
-
 def predictor(sentiment_value):
+	sentiment_dict = averageDBsentiment()
 	if sentiment_value in range(sentiment_dict['1'] - 0.05,
 								sentiment_dict['1'] + 0.05):
 		return 1

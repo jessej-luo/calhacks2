@@ -1,7 +1,7 @@
 from flask import Flask, render_template, g, request, redirect
-import models as m
 import sqlite3
 import json
+import models as m
 import sentiment as s
 
 app = Flask(__name__)
@@ -31,7 +31,6 @@ if __name__ == "__main__":
 def review_prediction(review):
 	sent_tok = s.singularTokenize(review)
 	average = indi_sentimentR(sent_tok)
-	
 
 with open('reviews.json') as reviews_file:
 	reviews = json.load(reviews_file)
@@ -47,4 +46,5 @@ def setupDB():
 
 def readDB():
 	print(m.Review.query.all())
+
 
