@@ -26,3 +26,11 @@ class Review(db.Model):
 		return '<ID: {} Stars: {} Sentiment: {} Review: {}>'.format(
 			self.id, self.stars, self.sentiment, self.review[0:100])
 
+	def __init__(self, id, review, stars):
+		self.id = id
+		self.review = review
+		self.stars = stars
+
+	def __repr__(self):
+		return '<ID: {} Stars: {} Review: {}>'.format(self.id, self.stars, self.review[0:100])
+
