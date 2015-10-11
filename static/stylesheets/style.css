@@ -16,10 +16,11 @@ body {
 	margin-right: auto;
 	padding: 30px;
 	font-weight: 100;
+	position: relative;
 }
 
 .form-horizontal {
-	position: relative;
+	width: 100%;
 }
 
 .welcome {
@@ -46,4 +47,12 @@ label {
 
 .negative {
 	color: red;
+}
+
+.stars-section {
+	margin-top: 50px;
+}
+
+.true-rating {
+	margin-top: 10px;
 }

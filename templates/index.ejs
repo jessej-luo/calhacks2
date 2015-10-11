@@ -1,0 +1,45 @@
+<html>
+<head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/bootstrap.css') }}" />
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='javascripts/bootstrap.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='javascripts/ejs_production.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='javascripts/index.js') }}"></script>
+</head>
+<body>
+	<div class="container-back">
+		<div class="form-main">
+			<h1 class="welcome">Welcome</h1>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label">Business</label>
+					<div class="input-group">
+						<div class="input-group-btn">
+			        		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="business-type">Type</span> <span class="caret"></span></button>
+					        <ul class="dropdown-menu">
+					          <li><a href="#" class="type-dropdown">Restaurant</a></li>
+					          <li><a href="#" class="type-dropdown">Health and Medical</a></li>
+					          <li><a href="#" class="type-dropdown">Beauty and Spas</a></li>
+					          <li><a href="#" class="type-dropdown">Home Services</a></li>
+					          <li><a href="#" class="type-dropdown">Arts and Entertainment</a></li>
+					        </ul>
+		      			</div><!-- /btn-group -->
+		      			<input type="text" class="form-control" aria-label="..." placeholder="Name">
+		    		</div><!-- /input-group -->
+	    		</div>
+	    		<div class="form-group">
+	    			<label>Your Review</label>
+	    			<textarea class="form-control review-text" rows="10"></textarea>
+	    		</div>
+    		</form>
+    		<div class="submit-section">
+	    			<span class="chars-left"></span>
+	    			<button class="btn btn-default submit-review">Submit</button>
+	    	</div>
+		</div>
+	</div>
+</body>
+</html>
