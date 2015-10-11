@@ -5,6 +5,23 @@ $(document).ready(function() {
 		$('.business-type').text(type);
 	});
 
+	
+    var $container = $('.container-back');
+    var backgrounds = [
+      'url(../images/restaurant1.jpg)', 
+      'url(http://static.jsbin.com/images/popout.png)'];
+    var current = 0;
+
+    function nextBackground() {
+        $container.css(
+            'background',
+        backgrounds[current = ++current % backgrounds.length]);
+
+        setTimeout(nextBackground, 5000);
+    }
+    setTimeout(nextBackground, 5000);
+    $container.css('background', backgrounds[0]);
+
 	var calculateChars = function() {
 		var used = $('.review-text').val().length;
 		var left = 5000 - used;
