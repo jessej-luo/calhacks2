@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 import re
 import string
 
-with open('reviews.json') as reviews_file:
+with open('reviews_small.json') as reviews_file:
 	reviews = json.load(reviews_file)
 
 #Load api key
@@ -12,11 +12,11 @@ indicoio.config.api_key = 'b7053e769d8d561cd1c1f5c1636010f0'
 
 #Splits each review into a list of sentences, split by period
 def reviewTokenize(reviews):
-	return [sent_tokenize(review['text']) for review in reviews]
+	return [(review['stars'], sent_tokenize(review['text'])) for review in reviews]
 
 #Splits each sentence in review into a bunch of words
 def splitSentence(split_reviews):
-	return [[sentence.split() for sentence in review] for review in split_reviews]
+	return [[sentence.split() for sentence in review[1]] for review in split_reviews]
 
 #Retrieves SENTENCE at designated review INDEX and sentence INDEX
 def getSentence(reviews, rindex, index):
@@ -25,16 +25,6 @@ def getSentence(reviews, rindex, index):
 #Retrieves REVIEW at designated INDEX
 def getReview(reviews, index):
 	return reviews[index]
-
-#Removes stop words, then rejoins String into sentences
-# def removeStop(splitSentence):
-# 	for review in splitSentence:
-# 		for i in range(0, len(review)):
-# 			filtered_words = [word for word in review[i] if 
-# 						word not in stopwords.words('english')]
-# 			review[i] = filtered_words
-# 			review[i] = ' '.join(review[i])
-# 	return splitSentence
 
 #Checks for repetition in given REVIEW sentence list, returns dictionary of frequency
 def repetitionCheck(reviews):
@@ -68,20 +58,15 @@ def indi_sentiment(reviews):
 def cleanText(reviews):
 	return [[sentence.translate().lower() 
 			for sentence in review] for review in reviews]
-# def punctuation_counter(splitReviews):
-# 	count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
-# 	punctuationDict = {}
-# 	for review in splitReviews:
-# 		for sentence in review:
-# 			punctuationList.append(count(sentence, string.punctuation))
-# 	return punctuationList
+
 
 #TEST FILES
 splitReviews = reviewTokenize(reviews)
+print(splitReviews)
 splitSentence = splitSentence(splitReviews)
 dict = repetitionCheck(splitSentence)
-sentiment = indi_sentiment(splitReviews)
-print(sentiment)
+#sentiment = indi_sentiment(splitReviews)
+#print(sentiment)
 
 # print(punctuation_counter(splitReviews))
 # #Punctuation 
@@ -93,5 +78,21 @@ print(sentiment)
 
 #print(punctuation_counter(punctuation,reviewTokenize(reviews)))
 
+#Removes stop words, then rejoins String into sentences
+# def removeStop(splitSentence):
+# 	for review in splitSentence:
+# 		for i in range(0, len(review)):
+# 			filtered_words = [word for word in review[i] if 
+# 						word not in stopwords.words('english')]
+# 			review[i] = filtered_words
+# 			review[i] = ' '.join(review[i])
+# 	return splitSentence
 
+# def punctuation_counter(splitReviews):
+# 	count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
+# 	punctuationDict = {}
+# 	for review in splitReviews:
+# 		for sentence in review:
+# 			punctuationList.append(count(sentence, string.punctuation))
+# 	return punctuationList
 
