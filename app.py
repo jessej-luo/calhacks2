@@ -23,7 +23,6 @@ if __name__ == "__main__":
 	app.run()
 
 #Set up Database by opening Json File
-
 # def db_addReview(stars, review):
 # 	id = m.Review.id.property.columns[0].type.length
 # 	stars = #input
@@ -41,12 +40,11 @@ def setupDB():
 	for index in range(0, len(reviews)):
 		review = m.Review(reviews[index]['id'], 
 			reviews[index]['text'], 
-			reviews[index]['stars'], s.indi_sentimentR(s.singularTokenize(reviews[index]['text'])))
+			reviews[index]['stars'], 
+			s.indi_sentimentR(s.singularTokenize(reviews[index]['text'])))
 		m.db.session.add(review)
 		m.db.session.commit()
 
 def readDB():
-
-
-	
+	print(m.Review.query.all())
 
