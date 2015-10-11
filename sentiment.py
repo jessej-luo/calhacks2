@@ -53,8 +53,12 @@ def indi_sentimentR(review):
 	for sentence in review:
 		sum += indicoio.sentiment(sentence)
 		count += 1
-	average = sum/count
-	return average
+	try:
+		average = sum/count
+		return average
+	except ZeroDivisionError:
+		print("Empty review.")
+		
 
 #average sentiment of different reviews
 def averageSentiment(reviews):
@@ -80,19 +84,19 @@ def averageDBsentiment():
 
 def predictor(sentiment_value):
 	sentiment_dict = averageDBsentiment()
-	if sentiment_value in range(sentiment_dict['1'] - 0.05,
-								sentiment_dict['1'] + 0.05):
+	if sentiment_value in range(int(sentiment_dict[1] - 0.05),
+								int(sentiment_dict[1] + 0.05)):
 		return 1
-	if sentiment_value in range(sentiment_dict['2'] - 0.05,
-								sentiment_dict['2'] + 0.05):
+	if sentiment_value in range(int(sentiment_dict[2] - 0.05),
+								int(sentiment_dict[2] + 0.05)):
 		return 2
-	if sentiment_value in range(sentiment_dict['3'] - 0.10,
-								sentiment_dict['3'] + 0.08):
+	if sentiment_value in range(int(sentiment_dict[3] - 0.10),
+								int(sentiment_dict[3] + 0.08)):
 		return 3
-	if sentiment_value in range(sentiment_dict['4'] - 0.05,
-								sentiment_dict['4'] + 0.05):
+	if sentiment_value in range(int(sentiment_dict[4] - 0.05),
+								int(sentiment_dict[4] + 0.05)):
 		return 4
-	if sentiment_value in range(sentiment_dict['5'] + 0.02, 1):
+	if sentiment_value in range(int(sentiment_dict[5] + 0.02), 1):
 		return 5
 	else:
 		return 3

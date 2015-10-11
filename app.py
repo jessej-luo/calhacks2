@@ -21,11 +21,14 @@ def main():
 	
 @app.route("/review", methods=["POST"])
 def receive_review():
-	return render_template("index.ejs")
+	review = request.form['review']
+	prediction = review_prediction(review)
+	return str(prediction)
 
 def review_prediction(review):
 	sent_tok = s.singularTokenize(review)
-	average = indi_sentimentR(sent_tok)
+	average = s.indi_sentimentR(sent_tok)
+	return s.predictor(average)
 
 #review handling
 with open('reviews_small.json') as reviews_file:
@@ -42,7 +45,6 @@ def setupDB():
 
 def readDB():
 	print(m.Review.query.all())
-
 
 if __name__ == "__main__":
 	app.run()
