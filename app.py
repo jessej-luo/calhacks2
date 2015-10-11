@@ -17,7 +17,7 @@ def get_db():
 
 @app.route("/")
 def main():
-	return render_template('index.ejs')
+	return render_template()
 
 if __name__ == "__main__":
 	app.run()
