@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g, request, redirect
+from flask import Flask, render_template, g, request, redirect, jsonify
 import sqlite3
 import json
 import models as m
@@ -14,32 +14,21 @@ def get_db():
 	if db is None:
 		db = g._database = sqlite3.connect(DATABASE)
 	return db
-
+#routes
 @app.route("/")
 def main():
 	return render_template("index.ejs")
-
-if __name__ == "__main__":
-	app.run()
-
+	
 @app.route("/review", methods=["POST"])
 def receive_review():
-	review = request.args.get('review', '', type=string)
-	stars = request.args.get('stars', 0, type=int)
 	return render_template("index.ejs")
-
-
-#Set up Database by opening Json File
-# def db_addReview(stars, review):
-# 	id = m.Review.id.property.columns[0].type.length
-# 	stars = #input
-# 	review = m.Review(id, review, )
 
 def review_prediction(review):
 	sent_tok = s.singularTokenize(review)
 	average = indi_sentimentR(sent_tok)
 
-with open('reviews.json') as reviews_file:
+#review handling
+with open('reviews_small.json') as reviews_file:
 	reviews = json.load(reviews_file)
 
 def setupDB():
@@ -54,4 +43,13 @@ def setupDB():
 def readDB():
 	print(m.Review.query.all())
 
+
+if __name__ == "__main__":
+	app.run()
+
+#Set up Database by opening Json File
+# def db_addReview(stars, review):
+# 	id = m.Review.id.property.columns[0].type.length
+# 	stars = #input
+# 	review = m.Review(id, review, )
 
