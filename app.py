@@ -32,6 +32,8 @@ def receive_review_add():
 	length = len(m.Review.query.all())
 	sentiment = s.indi_sentimentR(s.singularTokenize(review))
 	reviewAdd = m.Review(length, review, stars, sentiment)
+	m.db.session.add(reviewAdd)
+	m.db.session.commit()
 	return ('', 202)
 
 def review_prediction(review):
@@ -40,7 +42,7 @@ def review_prediction(review):
 	return s.predictor(average)
 
 #review handling
-with open('reviews_small.json') as reviews_file:
+with open('reviews.json') as reviews_file:
 	reviews = json.load(reviews_file)
 
 def setupDB():
@@ -52,15 +54,12 @@ def setupDB():
 		m.db.session.add(review)
 		m.db.session.commit()
 
+def removeItem(id):
+	m.Review.query.filter(Review.id == id).delete()
+	m.Review.commit()
+
 def readDB():
 	print(m.Review.query.all())
 
 if __name__ == "__main__":
 	app.run()
-
-#Set up Database by opening Json File
-# def db_addReview(stars, review):
-# 	id = m.Review.id.property.columns[0].type.length
-# 	stars = #input
-# 	review = m.Review(id, review, )
-
