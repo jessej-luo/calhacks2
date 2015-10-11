@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 import re
 import string
 
-with open('reviews_small.json') as reviews_file:
+with open('reviews_med.json') as reviews_file:
 	reviews = json.load(reviews_file)
 
 #Load api key
@@ -16,7 +16,10 @@ def reviewTokenize(reviews):
 
 #Splits each sentence in review into a bunch of words
 def splitSentence(split_reviews):
-	return [[sentence.split() for sentence in review[1]] for review in split_reviews]
+	lst = []
+	for review in split_reviews:
+		lst.append((review[0], [sentence.split() for sentence in review[1]]))
+	return lst
 
 #Retrieves SENTENCE at designated review INDEX and sentence INDEX
 def getSentence(reviews, rindex, index):
@@ -41,30 +44,44 @@ def repetitionCheck(reviews):
 
 #Analysis of each reviews sentiment, and returns a dict of key: review id
 #and value: sentiment average
-def indi_sentiment(reviews):
-	sentiment_dict = {}
-	id = 0
-	for review in reviews:
-		sum = 0
-		count = 0
-		for sentence in review:
-			sum+= indicoio.sentiment(sentence)
-			count += 1
-		average = sum/count
-		sentiment_dict[id] = average
-		id += 1
-	return sentiment_dict
+def indi_sentimentR(review):
+	sum = 0 
+	count = 0
+	for sentence in review:
+		sum += indicoio.sentiment(sentence)
+		count += 1
+	average = sum/count
+	return average
 
-def cleanText(reviews):
-	return [[sentence.translate().lower() 
-			for sentence in review] for review in reviews]
+#average sentiment of different reviews
+def averageSentiment(reviews):
+	stars_dict = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+	stars_count = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+	for review_cluster in reviews:
+		stars_count[review_cluster[0]] += 1
+		average = indi_sentimentR(review_cluster[1])
+		stars_dict[review_cluster[0]] += average
+	for key in stars_dict:
+		stars_dict[key] = stars_dict[key]/stars_count[key]
+	return stars_dict
+
+#Takes in split in sentences, 
+#Removes stop words, then rejoins String into sentences
+# def removeStop(splitSentence):
+# 	for review in splitSentence:
+# 		for i in range(0, len(review)):
+# 			filtered_words = [word for word in review[i] if 
+# 						word not in stopwords.words('english')]
+# 			review[i] = filtered_words
+# 			review[i] = ' '.join(review[i])
+# 	return splitSentence 
+
 
 
 #TEST FILES
 splitReviews = reviewTokenize(reviews)
-print(splitReviews)
 splitSentence = splitSentence(splitReviews)
-dict = repetitionCheck(splitSentence)
+print(splitSentence)
 #sentiment = indi_sentiment(splitReviews)
 #print(sentiment)
 
@@ -77,16 +94,6 @@ dict = repetitionCheck(splitSentence)
 # 		print(sentence)
 
 #print(punctuation_counter(punctuation,reviewTokenize(reviews)))
-
-#Removes stop words, then rejoins String into sentences
-# def removeStop(splitSentence):
-# 	for review in splitSentence:
-# 		for i in range(0, len(review)):
-# 			filtered_words = [word for word in review[i] if 
-# 						word not in stopwords.words('english')]
-# 			review[i] = filtered_words
-# 			review[i] = ' '.join(review[i])
-# 	return splitSentence
 
 # def punctuation_counter(splitReviews):
 # 	count = lambda l1, l2: len(list(filter(lambda c: c in l2, l1)))
