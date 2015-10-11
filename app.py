@@ -25,6 +25,15 @@ def receive_review():
 	prediction = review_prediction(review)
 	return str(prediction)
 
+@app.route("/review_add", methods=["POST"])
+def receive_review_add():
+	review = request.form['review']
+	stars = request.form['stars']
+	length = len(m.Review.query.all())
+	sentiment = s.indi_sentimentR(s.singularTokenize(review))
+	reviewAdd = m.Review(length, review, stars, sentiment)
+	return ('', 202)
+
 def review_prediction(review):
 	sent_tok = s.singularTokenize(review)
 	average = s.indi_sentimentR(sent_tok)
