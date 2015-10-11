@@ -45,12 +45,15 @@ $(document).ready(function() {
 				'/review',
 				{stars: 0, review: review}
 			).done(function(res) {
+				var stars = parseInt(res);
 				$('.submit-review').unbind('click');
 				$('.submit-section').after(new EJS({url: 'static/stars.ejs'}).render());
 				var $predicted = $('.predicted');
-				for (var i = 0; i < res; i++) {
-					$predicted[i].removeClass('fa-star-o').addClass('fa-star');
-				}
+				$predicted.each(function(i) {
+					if (i < stars) {
+						$(this).removeClass('fa-star-o').addClass('fa-star');
+					}
+				});
 			}).fail(function(response) {
 				$('.submit-review').unbind('click');
 				$('.submit-section').after('<div>Fail</div>');
