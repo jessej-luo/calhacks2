@@ -17,12 +17,16 @@ def get_db():
 
 @app.route("/")
 def main():
-	return render_template()
+	return render_template("index.ejs")
 
 if __name__ == "__main__":
 	app.run()
 
 @app.route("/review", methods=["POST"])
+def receive_review():
+	review = request.args.get('review', '', type=string)
+	stars = request.args.get('stars', 0, type=int)
+	return render_template("index.ejs")
 
 
 #Set up Database by opening Json File
