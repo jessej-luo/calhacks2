@@ -84,21 +84,16 @@ def averageDBsentiment():
 
 def predictor(sentiment_value):
 	sentiment_dict = averageDBsentiment()
-	if sentiment_value in range(0, int(sentiment_dict[1] + 0.05)):
+	if sentiment_value >= 0 and sentiment_value <= sentiment_dict[1]:
 		return 1
-	if sentiment_value in range(int(sentiment_dict[2] - 0.05),
-								int(sentiment_dict[2] + 0.05)):
+	if sentiment_value >= sentiment_dict[1] and sentiment_value <= sentiment_dict[2]:
 		return 2
-	if sentiment_value in range(int(sentiment_dict[3] - 0.10),
-								int(sentiment_dict[3] + 0.08)):
+	if sentiment_value >= sentiment_dict[2] and sentiment_value <= sentiment_dict[3]:
 		return 3
-	if sentiment_value in range(int(sentiment_dict[4] - 0.05),
-								int(sentiment_dict[4] + 0.05)):
+	if sentiment_value >= sentiment_dict[3] and sentiment_value <= sentiment_dict[5]:
 		return 4
-	if sentiment_value in range(int(sentiment_dict[5] + 0.02), 1):
+	if sentiment_value >= sentiment_dict[5] and sentiment_value <= 1:
 		return 5
-	else:
-		return 3
 
 
 
