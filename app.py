@@ -15,12 +15,15 @@ def get_db():
 		db = g._database = sqlite3.connect(DATABASE)
 	return db
 
-@app.route("/", methods=['POST'])
+@app.route("/")
 def main():
 	return render_template('index.ejs')
 
 if __name__ == "__main__":
 	app.run()
+
+@app.route("/review", methods=["POST"])
+
 
 #Set up Database by opening Json File
 # def db_addReview(stars, review):

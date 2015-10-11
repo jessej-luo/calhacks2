@@ -8,13 +8,12 @@ $(document).ready(function() {
 	
     var $container = $('.container-back');
     var backgrounds = [
-      'url(../images/restaurant1.jpg)', 
-      'url(http://static.jsbin.com/images/popout.png)'];
+      'url(static/images/restaurant1.jpg)'];
     var current = 0;
 
     function nextBackground() {
         $container.css(
-            'background',
+            'background-image',
         backgrounds[current = ++current % backgrounds.length]);
 
         setTimeout(nextBackground, 5000);
@@ -43,7 +42,7 @@ $(document).ready(function() {
 		if ($('.review-text').val().length <= 5000) {
 			var review = $('.review-text').val();
 			$.post(
-				'/',
+				'/review',
 				{stars: 0, review: review}
 			).done(function(res) {
 				$('.submit-review').unbind('click');
