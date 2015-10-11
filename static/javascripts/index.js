@@ -54,9 +54,27 @@ $(document).ready(function() {
 						$(this).removeClass('fa-star-o').addClass('fa-star');
 					}
 				});
+				$('submit-section').remove();
 			}).fail(function(response) {
 				$('.submit-review').unbind('click');
 				$('.submit-section').after('<div>Fail</div>');
+			});
+		}
+	});
+
+	$(document).on('click', '.submit-stars', function() {
+		if ($('.review-text').val().length <= 5000) {
+			var review = $('.review-text').val();
+			var stars = $('.star-select.fa-star').length;
+			$.post(
+				'/review_add',
+				{stars: stars, review: review}
+			).done(function(res) {
+				$('.submit-stars').unbind('click');
+				$('.stars-section').after("<div>Thank you!</div>");
+			}).fail(function(response) {
+				$('.submit-review').unbind('click');
+				$('.stars-section').after('<div>Fail</div>');
 			});
 		}
 	});
@@ -67,10 +85,10 @@ $(document).ready(function() {
 	        $(this).prevAll().removeClass('fa-star-o').addClass('fa-star');
 	    },
 	    mouseleave: function(){
-	    	if ($(".star-select.clicked") != $(this)) {
+	    	if ($(this).nextAll('.clicked').length === 0 && !$(this).hasClass('clicked')) {
 		    	$(this).removeClass('fa-star').addClass('fa-star-o');
 		    	setTimeout(function () {
-		            if ($(".star-select:hover").length === 0) {
+		            if ($(".star-select:hover").length === 0 && $(".star-select.clicked").length === 0) {
 		            	$('.star-select').removeClass('fa-star').addClass('fa-star-o');
 		            }
 	        	}, 100);  
