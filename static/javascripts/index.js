@@ -47,10 +47,13 @@ $(document).ready(function() {
 			).done(function(res) {
 				$('.submit-review').unbind('click');
 				$('.submit-section').after(new EJS({url: 'static/stars.ejs'}).render());
+				var $predicted = $('.predicted');
+				for (var i = 0; i < res; i++) {
+					$predicted[i].removeClass('fa-star-o').addClass('fa-star');
+				}
 			}).fail(function(response) {
 				$('.submit-review').unbind('click');
-				//var res = $.parseJSON(response.responseText);
-				$('.submit-section').after(new EJS({url: 'static/stars.ejs'}).render());
+				$('.submit-section').after('<div>Fail</div>');
 			});
 		}
 	});
@@ -61,12 +64,22 @@ $(document).ready(function() {
 	        $(this).prevAll().removeClass('fa-star-o').addClass('fa-star');
 	    },
 	    mouseleave: function(){
-	    	$(this).removeClass('fa-star').addClass('fa-star-o');
-	    	setTimeout(function () {
-	            if ($(".star-select:hover").length === 0) {
-	            	$('.star-select').removeClass('fa-star').addClass('fa-star-o');
-	            }
-        	}, 100);     
+	    	if ($(".star-select.clicked") != $(this)) {
+		    	$(this).removeClass('fa-star').addClass('fa-star-o');
+		    	setTimeout(function () {
+		            if ($(".star-select:hover").length === 0) {
+		            	$('.star-select').removeClass('fa-star').addClass('fa-star-o');
+		            }
+	        	}, 100);  
+        	}   
 	    }
 	}, '.star-select');
+
+	$('.form-main').on('click', '.star-select', function() {
+		$(this).siblings().removeClass('clicked');
+		$(this).addClass('clicked');
+		$(this).nextAll().removeClass('fa-star').addClass('fa-star-o');
+		$(this).removeClass('fa-star-o').addClass('fa-star');
+	    $(this).prevAll().removeClass('fa-star-o').addClass('fa-star');
+	});
 });
